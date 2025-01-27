@@ -1,31 +1,70 @@
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { TooltipComponent } from '@syncfusion/ej2-react-popups'
+import { FiSettings } from 'react-icons/fi'
 
 function App() {
-
+  const activeMenu = true;
 
   return (
     <>
+      <BrowserRouter>
+        <div className='relative flex dark:bg-main-dark-bg'>
+          <div className='fixed right-4 bottom-4' style={{ zIndex: '1000' }}>
+            <TooltipComponent content="Settings" position='Top'>
+              <button type='button' className='text-3xl p-3 text-white' style={{ background: 'blue', borderRadius: '50%' }}>
+                <FiSettings />
+              </button>
+            </TooltipComponent>
+          </div>
+          {activeMenu ? (
+            <div className='w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white'>
+              Sidebar
+            </div>
+          ) : (<div className='w-0 dark:bg-secondary-dark-bg'>
+            Sidebar w-0
+          </div>)}
+          <div className={`dark:bg-main-bg min-h-screen w-full ${activeMenu ? 'md:ml-72' : 'flex-2'}`}>
+            <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
+              Navbar
+            </div>
+          </div>
+          <div>
+            <Routes>
+              {/* Dashboard */}
+              <Route path="/" element="Ecommerce"/>
+              <Route path="/ecommerce" element="Ecommerce" />
+              {/* Pages */}
+              <Route path="/orders" element="Orders" />
+              <Route path="/employees" element="Employees" />
+              <Route path="/customers" element="Customers" />
 
-<div className="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md">
-  <div className="col-span-2 text-lg font-bold capitalize rounded-md">
-    card title
-  </div>
-  <div className="col-span-2 rounded-md">
-    Using Lorem ipsum to focus attention on graphic elements in a webpage design proposal · One of the earliest examples
-    of the Lorem ipsum placeholder text on 1960s advertising...
-  </div>
-  <div className="col-span-1">
-    <button className="rounded-md bg-slate-300 hover:bg-slate-600 hover:text-slate-200 duration-300 p-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-external-link">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-        <polyline points="15 3 21 3 21 9"></polyline>
-        <line x1="10" y1="14" x2="21" y2="3"></line>
-      </svg>
-    </button>
-  </div>
+              {/* Apps */}
+              <Route path="/kanban" element="Kanban" />
+              <Route path="/editor" element="Editor" />
+              <Route path="/calendar" element="Calendar" />
+              <Route path="/color-picker" element="ColorPicker" />
+
+              {/* Charts */}
+              <Route path="/line" element="Line" />
+              <Route path="/area" element="Area" />
+              <Route path="/bar" element="Bar" />
+              <Route path="/pie" element="Pie" />
+              <Route path="/financial" element="Financial" />
+              <Route path="/color-mapping" element="ColorMapping" />
+              <Route path="/pyramid" element="Pyramid" />
+              <Route path="/stacked" element="Stacked" />
 
 
-  </div>
+
+
+            </Routes>
+          </div>
+
+
+        </div>
+
+      </BrowserRouter>
     </>
   )
 }
